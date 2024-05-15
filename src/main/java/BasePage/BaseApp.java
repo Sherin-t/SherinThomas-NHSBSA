@@ -19,6 +19,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,15 +36,43 @@ public class BaseApp {
 	public Actions Action;
 	public static Connection con;
 	public void start(String url, String path) {
-		WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
-				driver.manage().deleteAllCookies();
-				driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+		
+		String browserType = "chrome"; // Example browser type, you can replace it with user input
+        
+        if (browserType.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+			driver.get(url);
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
 				DesiredCapabilities caps = new DesiredCapabilities();
 				// Change resolution
-				caps.setCapability("resolution", "1024x768");
+				 caps.setCapability("resolution", "1024x768");
 				driver.manage().window().maximize();
 				driver.get(url);
+        } else if (browserType.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+			driver.get(url);
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+				DesiredCapabilities caps = new DesiredCapabilities();
+				// Change resolution
+				 caps.setCapability("resolution", "1024x768");
+				driver.manage().window().maximize();
+				driver.get(url);
+
+        } else {
+			System.out.println("Invalid browser type entered. Please choose 'chrome' or 'firefox'.");
+		return;
+	}
+				// WebDriverManager.chromedriver().setup();
+				// driver = new ChromeDriver();
+				// driver.manage().deleteAllCookies();
+				// driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+				// DesiredCapabilities caps = new DesiredCapabilities();
+				// // Change resolution
+				// caps.setCapability("resolution", "1024x768");
+				// driver.manage().window().maximize();
+				// driver.get(url);
 	}
 
 	public void teardown() {

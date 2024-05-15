@@ -5,7 +5,7 @@
     <classes>
       <class name="Runner.runner">
         <methods>
-          <include name="runScenario"/>
+          <include name="runScenario" invocation-numbers="0"/>
           <include name="tearDownClass"/>
           <include name="start"/>
           <include name="teardown"/>

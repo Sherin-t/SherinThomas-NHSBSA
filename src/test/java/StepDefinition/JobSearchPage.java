@@ -22,9 +22,9 @@ public class JobSearchPage extends BaseApp {
     }
 
     @When("^I input my preferences into the Search functionality$")
-    public void enter_usernameandpassword(String What, String Where,String jobref, String employer ) throws Exception {
+    public void enter_usernameandpassword( ) throws Exception {
     	Home= new JobSearch();
-        Home.JobFilters(What, Where,jobref,employer);
+        Home.JobFilters();
     }
 
     @Then("^I should see a list of jobs matching my preferences$")

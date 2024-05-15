@@ -8,21 +8,21 @@ public class JobSearch extends BaseApp{
 
     String what = "(//input[@class='nhsuk-input nhsuk-u--width-full'])[1]";
     String where ="(//input[@class='nhsuk-input nhsuk-u--width-full'])[2]";
-    String whereOption = "//ul[@role='listbox']//li[1]";
+    String whereOption = "//li[text()='Newcastle Business Park, Newcastle Upon Tyne']";
     String distance = "(//select[contains(@class,'nhsuk-select nhsuk-grid-column-full')])[1]";
     String distance5miles = "//option[text()='+5 Miles']";
-    String SearchButton = "//input[@class='nhsuk-button']";
-    String ClearSearch = "//a[contains(text(),'Clear filters')]";
+    String searchButton = "//input[@class='nhsuk-button']";
+    String clearSearch = "//a[contains(text(),'Clear filters')]";
     String allLocation ="//option[text()[normalize-space()='All locations']]";
-    String MoreOption = "//a[contains(text(),'More search options')]";
+    String moreOption = "//a[contains(text(),'More search options')]";
     String fewerOption = "//a[contains(text(),'Fewer search options')]";
-    String JobReference = "(//input[@class='nhsuk-input nhsuk-u--width-full'])[2]";
-    String Employer = "//input[@data-test='search-employer-input']";
-    String PayRange = "(//select[contains(@class,'nhsuk-select nhsuk-grid-column-full')])[2]";
-    String PayRange0to10 = "//option[text()='£0 to £10,000']";
-    String SortByDate = "(//select[@name='sort'])[1]";
-    String SortByNewDate = "//option[text()='Date Posted (newest)']";
-    String ResultTittle = "//a[contains(text(),'Principal Data Scientist')]";
+    String jobReference = "(//input[@class='nhsuk-input nhsuk-u--width-full'])[2]";
+    String employer = "//input[@data-test='search-employer-input']";
+    String payRange = "(//select[contains(@class,'nhsuk-select nhsuk-grid-column-full')])[2]";
+    String payRange0to10 = "//option[text()='£0 to £10,000']";
+    String sortByDate = "(//select[@name='sort'])[1]";
+    String sortByNewDate = "//option[text()='Date Posted (newest)']";
+    String resultTittle = "//a[contains(text(),'Principal Data Scientist')]";
     String closingDate = "(//strong[@class='nhsuk-u-font-weight-bold'])[2]";
     String acceptCookie = "//button[@id='accept-cookies']";
    
@@ -32,18 +32,20 @@ public class JobSearch extends BaseApp{
                 click(acceptCookie);
     
         }
-        public void JobFilters(String Title, String Location,String jobref, String employer)throws InterruptedException{
+        public void JobFilters()throws InterruptedException{
             Thread.sleep(5000);
             Elementappear(what);
             MoveToElement(what);
             typeIn(what, "Principal Data Scientist");
             MoveToElement(where);
+            Thread.sleep(3000);
             typeIn(where, "Newcastle Business Park, Newcastle Upon Tyne");
+            Thread.sleep(3000);
             MoveToElement(whereOption);
             click(whereOption);
             Thread.sleep(3000);
-            MoveToElement(ClearSearch);
-            click(ClearSearch);
+            MoveToElement(clearSearch);
+            click(clearSearch);
     
             Assert.assertEquals(isDisplayed(allLocation), true);
             Thread.sleep(5000);
@@ -54,7 +56,7 @@ public class JobSearch extends BaseApp{
             typeIn(where, "Newcastle Business Park, Newcastle Upon Tyne");
             MoveToElement(whereOption);
             click(whereOption);
-            MoveToElement(ClearSearch);
+            MoveToElement(clearSearch);
             MoveToElement(distance);
             click(distance);
             Thread.sleep(5000);
@@ -62,27 +64,27 @@ public class JobSearch extends BaseApp{
             click(distance5miles);
             MoveToElement(distance5miles);
             click(distance5miles);
-            MoveToElement(MoreOption);
-            click(MoreOption);
+            MoveToElement(moreOption);
+            click(moreOption);
             Assert.assertEquals(isDisplayed(fewerOption), true);
             Thread.sleep(5000);
-            MoveToElement(JobReference);
-            typeIn(JobReference, "076-ATH-CFA008-B");
-            MoveToElement(Employer);
-            typeIn(Employer, "NHS Counter Fraud Authority");
+            MoveToElement(jobReference);
+            typeIn(jobReference, "076-ATH-CFA008-B");
+            MoveToElement(employer);
+            typeIn(employer, "NHS Counter Fraud Authority");
             MoveToElement(distance);
-            click(PayRange);
+            click(payRange);
             MoveToElement(distance5miles);
-            click(PayRange0to10);
-            MoveToElement(SearchButton);
-            click(SearchButton);
+            click(payRange0to10);
+            MoveToElement(searchButton);
+            click(searchButton);
     
         }
         public void JobSearchList()throws InterruptedException{
         Thread.sleep(5000);
-        Assert.assertEquals(isDisplayed(ResultTittle), true);
+        Assert.assertEquals(isDisplayed(resultTittle), true);
 
-        String actualText = getText(ResultTittle);
+        String actualText = getText(resultTittle);
 
         // Expected string to verify
         String expectedText = what;
@@ -97,10 +99,10 @@ public class JobSearch extends BaseApp{
     }
        public void SortByLatestDate() throws InterruptedException{
         Thread.sleep(5000);
-        MoveToElement(SortByDate);
-        click(SortByDate);
-        MoveToElement(SortByNewDate);
-        click(SortByNewDate);
+        MoveToElement(sortByDate);
+        click(sortByDate);
+        MoveToElement(sortByNewDate);
+        click(sortByNewDate);
         Assert.assertEquals(isDisplayed(closingDate), true);
 
         String actualText = getText(closingDate);
